@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>idrock — AI Excellence Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f6f4ef;--cream2:#eceae3;--cream3:#ddd9cf;
+  --dark:#0e0e10;--dark2:#1a1a1e;--dark3:#252529;
+  --t1:#0e0e10;--t2:#3d3d42;--t3:#6b6b73;--t4:#9d9da5;
+  --tw:#f6f4ef;--tw2:#c5c3bc;--tw3:#8a8882;
+  --accent:#10b981;--accent2:#059669;--accent-light:#d1fae5;
+  --blue:#3b82f6;
+  --font:'Sora',sans-serif;--mono:'JetBrains Mono',monospace;
+  --ease:cubic-bezier(.22,1,.36,1);--r:24px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--cream);color:var(--t2);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:15px}
+::selection{background:var(--accent-light);color:var(--t1)}
+img{display:block;max-width:100%}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleUp{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@keyframes marqueeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.v{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}.d4{transition-delay:.24s}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:center;padding:16px 40px}
+.nav-bar{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1280px;padding:10px 10px 10px 24px;background:rgba(246,244,239,.75);backdrop-filter:blur(20px) saturate(1.5);border:1px solid rgba(0,0,0,.06);border-radius:60px;transition:all .3s}
+nav.scrolled .nav-bar{background:rgba(246,244,239,.92);box-shadow:0 4px 30px rgba(0,0,0,.06)}
+.nav-l{display:flex;align-items:center;gap:16px}
+.nav-l img{height:24px}
+.nav-l img:nth-child(3){height:20px;opacity:.6}
+.nav-dot{width:3px;height:3px;border-radius:50%;background:var(--t4)}
+.nav-c{display:flex;gap:4px}
+.nav-c a{font-size:13px;font-weight:500;color:var(--t3);text-decoration:none;padding:8px 16px;border-radius:40px;transition:all .2s;letter-spacing:-.01em}
+.nav-c a:hover{color:var(--t1);background:rgba(0,0,0,.04)}
+.nav-cta{padding:10px 22px;background:var(--dark);color:var(--tw);font-size:13px;font-weight:600;border-radius:40px;text-decoration:none;letter-spacing:-.01em;transition:all .25s}
+.nav-cta:hover{background:var(--dark2);transform:scale(1.03)}
+
+/* ═══ HERO ═══ */
+.hero{padding:120px 40px 0;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;min-height:100vh;max-width:1360px;margin:0 auto}
+.hero-text{padding-right:40px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px 6px 8px;background:var(--accent-light);border-radius:30px;font-size:12px;font-weight:600;color:var(--accent2);margin-bottom:28px;opacity:0;animation:fadeUp .7s var(--ease) .3s forwards}
+.hero-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.hero h1{font-size:clamp(38px,4.5vw,58px);font-weight:800;line-height:1.08;letter-spacing:-.045em;color:var(--t1);margin-bottom:24px}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line span{display:inline-block;opacity:0;animation:fadeUp .8s var(--ease) forwards}
+.hero h1 .line:nth-child(1) span{animation-delay:.4s}
+.hero h1 .line:nth-child(2) span{animation-delay:.52s}
+.hero h1 .line:nth-child(3) span{animation-delay:.64s}
+.hero h1 .gr{background:linear-gradient(135deg,var(--accent2),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{font-size:17px;color:var(--t3);max-width:420px;line-height:1.7;margin-bottom:32px;opacity:0;animation:fadeUp .7s var(--ease) .8s forwards}
+.hero-pills{display:flex;gap:10px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s var(--ease) .95s forwards}
+.hero-pill{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;background:var(--cream2);border-radius:12px;font-size:12px;font-weight:600;color:var(--t2);letter-spacing:-.01em}
+.hero-pill svg{width:14px;height:14px;color:var(--accent)}
+.hero-image{position:relative;border-radius:var(--r);overflow:hidden;height:580px;opacity:0;animation:scaleUp .9s var(--ease) .5s forwards}
+.hero-image img{width:100%;height:100%;object-fit:cover}
+.hero-image::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(14,14,16,.3) 100%)}
+.hero-image-tag{position:absolute;bottom:20px;left:20px;z-index:2;display:flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border-radius:10px;border:1px solid rgba(255,255,255,.1)}
+.hero-image-tag img{height:18px}
+.hero-image-tag span{font-size:11px;color:#fff;font-weight:500}
+
+/* ═══ MARQUEE ═══ */
+.marquee-wrap{padding:48px 0;border-top:1px solid var(--cream3);border-bottom:1px solid var(--cream3);overflow:hidden}
+.marquee{display:flex;gap:48px;animation:marqueeScroll 20s linear infinite;width:max-content}
+.marquee-item{font-size:14px;font-weight:600;color:var(--t4);white-space:nowrap;display:flex;align-items:center;gap:10px}
+.marquee-dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+
+/* ═══ MISSION ═══ */
+.mission{padding:120px 40px;max-width:1360px;margin:0 auto}
+.mission-top{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start;margin-bottom:64px}
+.mission-label{font-size:12px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
+.mission-title{font-size:clamp(32px,3.5vw,46px);font-weight:800;color:var(--t1);letter-spacing:-.04em;line-height:1.12}
+.mission-intro{font-size:16px;color:var(--t3);line-height:1.8;padding-top:24px}
+.mission-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.mc{padding:32px 28px;background:var(--cream2);border-radius:20px;transition:all .4s var(--ease);border:1px solid transparent}
+.mc:hover{background:#fff;border-color:var(--cream3);box-shadow:0 12px 40px rgba(0,0,0,.06);transform:translateY(-4px)}
+.mc-num{font-family:var(--mono);font-size:11px;color:var(--t4);margin-bottom:16px;letter-spacing:.04em}
+.mc h3{font-size:16px;font-weight:700;color:var(--t1);margin-bottom:10px;letter-spacing:-.02em}
+.mc p{font-size:14px;color:var(--t3);line-height:1.7}
+
+/* ═══ INFRA ═══ */
+.infra{background:var(--dark);color:var(--tw);padding:120px 40px;position:relative;overflow:hidden}
+.infra-bg{position:absolute;inset:0;background:url('https://d2xsxph8kpxj0f.cloudfront.net/310519663234781857/nGPS9AVxRhGPmVjmNyLfJG/infra-section_03743586.jpg') center/cover;opacity:.2}
+.infra-z{position:relative;z-index:2;max-width:1280px;margin:0 auto}
+.infra-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.infra-label{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.infra-title{font-size:clamp(32px,3.5vw,46px);font-weight:800;color:#fff;letter-spacing:-.04em;line-height:1.12}
+.infra-partner{display:flex;align-items:center;gap:12px;padding:10px 20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:12px}
+.infra-partner img{height:20px;filter:brightness(1.2)}
+.infra-partner span{font-size:11px;color:var(--tw3);font-family:var(--mono);letter-spacing:.04em}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;gap:14px}
+.bento-card{padding:32px 28px;background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.07);border-radius:20px;transition:all .4s var(--ease)}
+.bento-card:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.12);transform:translateY(-3px)}
+.bento-card.big{grid-column:span 2;display:flex;align-items:center;gap:32px;padding:36px 36px}
+.bento-val{font-size:52px;font-weight:800;color:#fff;letter-spacing:-.05em;line-height:1}
+.bento-val .u{font-size:18px;font-weight:600;color:var(--accent);margin-left:2px}
+.bento-label{font-size:15px;font-weight:600;color:rgba(255,255,255,.85);margin-top:6px}
+.bento-desc{font-size:12px;color:rgba(255,255,255,.35);margin-top:3px}
+.bento-big-val{font-size:64px;font-weight:800;color:var(--accent);letter-spacing:-.05em;line-height:1}
+.bento-big-text .bento-label{font-size:16px}
+
+/* ═══ PROJECTS ═══ */
+.projects{padding:120px 0 120px 40px;overflow:hidden}
+.projects-header{max-width:1280px;margin-bottom:48px}
+.projects-label{font-size:12px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.projects-title{font-size:clamp(32px,3.5vw,46px);font-weight:800;color:var(--t1);letter-spacing:-.04em}
+.projects-scroll{display:flex;gap:20px;overflow-x:auto;padding-bottom:20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.projects-scroll::-webkit-scrollbar{display:none}
+.pc{flex:0 0 400px;background:#fff;border:1px solid var(--cream3);border-radius:var(--r);overflow:hidden;scroll-snap-align:start;transition:all .45s var(--ease)}
+.pc:hover{box-shadow:0 20px 60px rgba(0,0,0,.08);transform:translateY(-5px);border-color:transparent}
+.pc:last-child{margin-right:40px}
+.pc-img-wrap{height:240px;overflow:hidden;position:relative}
+.pc-img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.pc:hover .pc-img{transform:scale(1.05)}
+.pc-badge{position:absolute;top:14px;right:14px;font-size:11px;font-weight:700;color:#fff;padding:5px 14px;background:var(--accent);border-radius:20px}
+.pc-num{position:absolute;bottom:10px;left:16px;font-size:64px;font-weight:900;color:rgba(255,255,255,.08);line-height:1;letter-spacing:-.04em}
+.pc-body{padding:28px 28px 32px}
+.pc-body h3{font-size:22px;font-weight:700;color:var(--t1);letter-spacing:-.03em;margin-bottom:8px}
+.pc-body p{font-size:14px;color:var(--t3);line-height:1.7;margin-bottom:16px}
+.pc-tags{display:flex;gap:6px}
+.pc-tag{font-size:11px;font-weight:600;color:var(--t3);padding:5px 12px;background:var(--cream);border-radius:8px}
+
+/* ═══ TEAM ═══ */
+.team{padding:120px 40px;max-width:1360px;margin:0 auto}
+.team-header{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:64px;align-items:end}
+.team-label{font-size:12px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.team-title{font-size:clamp(32px,3.5vw,46px);font-weight:800;color:var(--t1);letter-spacing:-.04em;line-height:1.12}
+.team-intro{font-size:16px;color:var(--t3);line-height:1.7}
+.team-section{margin-bottom:48px}
+.team-section-label{font-size:11px;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--cream3)}
+.team-row{display:flex;gap:16px;flex-wrap:wrap}
+.tc{flex:1;min-width:220px;max-width:280px;background:#fff;border:1px solid var(--cream3);border-radius:20px;padding:32px 24px;text-align:center;transition:all .35s var(--ease)}
+.tc:hover{box-shadow:0 12px 36px rgba(0,0,0,.06);transform:translateY(-3px);border-color:transparent}
+.tc-img{width:100px;height:100px;border-radius:50%;overflow:hidden;background:var(--cream2);margin:0 auto 16px;border:3px solid var(--cream3);transition:border-color .3s}
+.tc:hover .tc-img{border-color:var(--accent)}
+.tc-img img{width:100%;height:100%;object-fit:cover;object-position:top}
+.tc-info h4{font-size:15px;font-weight:700;color:var(--t1);letter-spacing:-.02em;margin-bottom:3px}
+.tc-info span{font-size:13px;color:var(--t4);transition:color .3s}
+.tc:hover .tc-info span{color:var(--accent)}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--dark);color:var(--tw);padding:56px 40px 40px}
+.footer-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start}
+.f-l{display:flex;flex-direction:column;gap:20px}
+.f-logos{display:flex;align-items:center;gap:16px}
+.f-logos img{height:22px;filter:brightness(.85);opacity:.6}
+.f-sep{width:1px;height:16px;background:rgba(255,255,255,.1)}
+.f-desc{font-size:13px;color:var(--tw3);max-width:320px;line-height:1.7}
+.f-r{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.f-r a{color:var(--accent);text-decoration:none;font-size:14px;font-weight:500;transition:opacity .2s}
+.f-r a:hover{opacity:.7}
+.f-r small{font-size:12px;color:var(--tw3)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;padding:110px 24px 40px}.hero-text{padding-right:0}.hero-image{height:400px}
+  .mission-top{grid-template-columns:1fr;gap:24px}.mission-grid{grid-template-columns:1fr 1fr}
+  .bento{grid-template-columns:1fr 1fr}.bento-card.big{grid-column:span 2}
+  .team-header{grid-template-columns:1fr}.team-row{flex-wrap:wrap}.tc{min-width:calc(50% - 8px)}
+  .mission,.team{padding:80px 24px}.infra{padding:80px 24px}.projects{padding:80px 0 80px 24px}
+  nav{padding:10px 16px}.nav-c{display:none}
+  footer{padding:40px 24px}.footer-inner{flex-direction:column;gap:24px}.f-r{align-items:flex-start}
+  .infra-header{flex-direction:column;align-items:flex-start;gap:16px}
+}
+@media(max-width:640px){
+  .hero{min-height:auto;padding-top:100px}.hero-image{height:300px}
+  .mission-grid,.bento{grid-template-columns:1fr}.bento-card.big{grid-column:span 1;flex-direction:column;align-items:flex-start}
+  .pc{flex:0 0 85vw}.tc{min-width:100%;max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-bar">
+    <div class="nav-l">
+      <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663234781857/nGPS9AVxRhGPmVjmNyLfJG/pasted_file_xG9Rv9_log2_db280695.png" alt="idrock" style="filter:brightness(0)">
+      <div class="nav-dot"></div>
+      <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663234781857/nGPS9AVxRhGPmVjmNyLfJG/pasted_file_Do1Dwx_newuu_f45525d1.png" alt="New Uzbekistan University" style="filter:brightness(0);opacity:.5">
+    </div>
+    <div class="nav-c">
+      <a href="#about">About</a>
+      <a href="#infrastructure">Infrastructure</a>
+      <a href="#projects">Projects</a>
+      <a href="#team">Team</a>
+    </div>
+    <a href="mailto:idrock@newuu.uz" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-text">
+    <div class="hero-badge"><div class="hero-badge-dot"></div>AI Excellence Center</div>
+    <h1>
+      <span class="line"><span>Advancing AI</span></span>
+      <span class="line"><span class="gr">Research</span></span>
+      <span class="line"><span>in Central Asia</span></span>
+    </h1>
+    <p class="hero-desc">Building foundational AI for 35 million Uzbek speakers — from language models to speech, at New Uzbekistan University.</p>
+    <div class="hero-pills">
+      <div class="hero-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Presidential Decree PD-189
+      </div>
+      <div class="hero-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 8 12 8 12s8-6.6 8-12a8 8 0 0 0-8-8z"/></svg>
+        Tashkent, Uzbekistan
+      </div>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663234781857/nGPS9AVxRhGPmVjmNyLfJG/hero-national-DXgbQ4cSWnf5jPezn4jQ2K.webp" alt="Tashkent skyline">
+    <div class="hero-image-tag">
+      <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663234781857/nGPS9AVxRhGPmVjmNyLfJG/pasted_file_xG9Rv9_log2_db280695.png" alt="idrock">
+      <span>New Uzbekistan University</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee">
+    <div class="marquee-item"><div class="marquee-dot"></div>Machine Learning</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Natural Language Processing</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Speech Recognition</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Speech Synthesis</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Uzbek LLM</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Open-Weight Models</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>AI Benchmarks</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Central Asian AI</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Machine Learning</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Natural Language Processing</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Speech Recognition</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Speech Synthesis</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Uzbek LLM</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Open-Weight Models</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>AI Benchmarks</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Central Asian AI</div>
+  </div>
+</div>
+
+<!-- MISSION -->
+<section class="mission" id="about">
+  <div class="mission-top reveal">
+    <div>
+      <div class="mission-label">Our Mission</div>
+      <h2 class="mission-title">Four pillars driving AI excellence</h2>
+    </div>
+    <p class="mission-intro">We're building the infrastructure, talent, and research needed to make Central Asia a meaningful contributor to global AI — starting with the Uzbek language.</p>
+  </div>
+  <div class="mission-grid">
+    <div class="mc reveal d1"><div class="mc-num">01</div><h3>Education &amp; Talent</h3><p>Cultivating next-gen AI researchers through world-class programs, hands-on training, and mentorship from leading experts.</p></div>
+    <div class="mc reveal d2"><div class="mc-num">02</div><h3>Research &amp; Innovation</h3><p>Building foundational ML models for Central Asian languages — from Uzbek LLMs to multimodal systems, with open-weight releases.</p></div>
+    <div class="mc reveal d3"><div class="mc-num">03</div><h3>Industry Projects</h3><p>Deploying real-world AI solutions across healthcare, education, government, and finance to drive measurable impact.</p></div>
+    <div class="mc reveal d4"><div class="mc-num">04</div><h3>International Cooperation</h3><p>Partnering with leading AI institutions worldwide through joint research and collaborative programs.</p></div>
+  </div>
+</section>
+
+<!-- INFRASTRUCTURE -->
+<section class="infra" id="infrastructure">
+  <div class="infra-bg"></div>
+  <div class="infra-z">
+    <div class="infra-header reveal">
+      <div><div class="infra-label">Infrastructure</div><h2 class="infra-title">Built for scale</h2></div>
+      <div class="infra-partner"><span>Strategic Partner</span><img src="https://idrock.uz/Aloqabank.png" alt="AloqaBank"></div>
+    </div>
+    <div class="bento">
+      <div class="bento-card reveal d1"><div class="bento-val" data-count="16">0<span class="u">×</span></div><div class="bento-label">H200 GPUs</div><div class="bento-desc">141 GB HBM3e each</div></div>
+      <div class="bento-card reveal d2"><div class="bento-val" data-count="12">0<span class="u">×</span></div><div class="bento-label">DGX Spark</div><div class="bento-desc">Desktop AI supercomputing</div></div>
+      <div class="bento-card reveal d3"><div class="bento-val" data-count="2.25" data-dec="1">0<span class="u">TB+</span></div><div class="bento-label">Total VRAM</div><div class="bento-desc">Combined GPU memory</div></div>
+      <div class="bento-card reveal d4"><div class="bento-val" data-count="1">0<span class="u">PF+</span></div><div class="bento-label">Peak Compute</div><div class="bento-desc">FP8 training throughput</div></div>
+      <div class="bento-card big reveal"><div class="bento-big-val">$1M</div><div class="bento-big-text"><div class="bento-label">Total cluster investment</div><div class="bento-desc">Enterprise-grade compute powering the next generation of Central Asian AI models</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="projects-header reveal"><div class="projects-label">Research Portfolio</div><h2 class="projects-title">Active projects</h2></div>
+  <div class="projects-scroll">
+    <div class="pc">
+      <div class="pc-img-wrap"><img class="pc-img" src="https://idrock.uz/card2-ollm.jpg" alt="Ollm"><div class="pc-num">01</div><div class="pc-badge">Active</div></div>
+      <div class="pc-body"><h3>Ollm</h3><p>A large language model built for the Uzbek language, serving 35M+ native speakers with state-of-the-art NLU and generation.</p><div class="pc-tags"><span class="pc-tag">LLM</span><span class="pc-tag">NLP</span></div></div>
+    </div>
+    <div class="pc">
+      <div class="pc-img-wrap"><img class="pc-img" src="https://idrock.uz/card2-stt.jpg" alt="STT"><div class="pc-num">02</div><div class="pc-badge">Active</div></div>
+      <div class="pc-body"><h3>STT</h3><p>Real-time speech-to-text model for Uzbek, enabling accurate and low-latency transcription across accents and dialects.</p><div class="pc-tags"><span class="pc-tag">Speech</span><span class="pc-tag">ASR</span></div></div>
+    </div>
+    <div class="pc">
+      <div class="pc-img-wrap"><img class="pc-img" src="https://idrock.uz/card2-tts.jpg" alt="TTS"><div class="pc-num">03</div><div class="pc-badge">Active</div></div>
+      <div class="pc-body"><h3>TTS</h3><p>A natural-sounding Uzbek speech synthesis model, converting text to lifelike audio for voice applications and accessibility.</p><div class="pc-tags"><span class="pc-tag">Speech</span><span class="pc-tag">Synthesis</span></div></div>
+    </div>
+    <div class="pc">
+      <div class="pc-img-wrap"><img class="pc-img" src="https://idrock.uz/card2-eval.jpg" alt="idrock-eval"><div class="pc-num">04</div><div class="pc-badge">Active</div></div>
+      <div class="pc-body"><h3>idrock-eval</h3><p>A centralized evaluation framework serving as the definitive benchmark suite for foundational Uzbek AI models.</p><div class="pc-tags"><span class="pc-tag">Benchmark</span><span class="pc-tag">Evaluation</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="team-header reveal">
+    <div><div class="team-label">Team</div><h2 class="team-title">The people behind idrock</h2></div>
+    <p class="team-intro">A focused team of researchers and engineers driving AI forward in Central Asia.</p>
+  </div>
+  <div class="team-section">
+    <div class="team-section-label">Advisory Board</div>
+    <div class="team-row">
+      <div class="tc reveal d1"><div class="tc-img"><img src="https://idrock.uz/bahodir.png" alt="Bahodir Ahmedov"></div><div class="tc-info"><h4>Bahodir Ahmedov</h4><span>Advisory Board</span></div></div>
+      <div class="tc reveal d2"><div class="tc-img"><img src="https://idrock.uz/abdurahmon.png" alt="Abdurahmon Umarov"></div><div class="tc-info"><h4>Abdurahmon Umarov</h4><span>Advisory Board</span></div></div>
+    </div>
+  </div>
+  <div class="team-section">
+    <div class="team-section-label">Core Team</div>
+    <div class="team-row">
+      <div class="tc reveal d1"><div class="tc-img"><img src="https://idrock.uz/asadullo.png" alt="Asadullo Ganiev"></div><div class="tc-info"><h4>Asadullo Ganiev</h4><span>Head of Cluster</span></div></div>
+      <div class="tc reveal d2"><div class="tc-img"><img src="https://idrock.uz/dovud.png" alt="Dovud Asadov"></div><div class="tc-info"><h4>Dovud Asadov</h4><span>ML Engineer</span></div></div>
+      <div class="tc reveal d3"><div class="tc-img"><img src="https://idrock.uz/husanboy.png" alt="Husanboy Mansuraliyev"></div><div class="tc-info"><h4>Husanboy Mansuraliyev</h4><span>ML Engineer</span></div></div>
+      <div class="tc reveal d4"><div class="tc-img"><img src="https://idrock.uz/mardon.png" alt="Mardon Hazratov"></div><div class="tc-info"><h4>Mardon Hazratov</h4><span>ML Engineer</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="f-l">
+      <div class="f-logos">
+        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663234781857/nGPS9AVxRhGPmVjmNyLfJG/pasted_file_xG9Rv9_log2_db280695.png" alt="idrock">
+        <div class="f-sep"></div>
+        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663234781857/nGPS9AVxRhGPmVjmNyLfJG/pasted_file_Do1Dwx_newuu_f45525d1.png" alt="NewUU">
+        <div class="f-sep"></div>
+        <img src="https://idrock.uz/Aloqabank.png" alt="AloqaBank">
+      </div>
+      <p class="f-desc">The AI Excellence Center at New Uzbekistan University — advancing foundational AI research in Central Asia.</p>
+    </div>
+    <div class="f-r">
+      <a href="mailto:idrock@newuu.uz">idrock@newuu.uz</a>
+      <small>© 2026 idrock AI Excellence Center · Tashkent</small>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Reveals
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('v')})},{threshold:.05,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Count-up
+const cobs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting&&!el.target._c){el.target._c=1;
+const t=parseFloat(el.target.dataset.count),dec=el.target.dataset.dec==='1',
+u=el.target.querySelector('.u').outerHTML,dur=1000,st=performance.now();
+!function a(n){const p=Math.min((n-st)/dur,1),ez=1-Math.pow(1-p,4);
+el.target.innerHTML=(dec?(ez*t).toFixed(2):Math.round(ez*t))+u;
+if(p<1)requestAnimationFrame(a)}(st)}})},{threshold:.5});
+document.querySelectorAll('.bento-val[data-count]').forEach(el=>cobs.observe(el));
+
+// Nav scroll
+window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',scrollY>40)},{passive:true});
+
+// Smooth nav links
+document.querySelectorAll('nav a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})})});
+</script>
+</body>
+</html>
